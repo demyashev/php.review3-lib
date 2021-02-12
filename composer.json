@@ -1,0 +1,40 @@
+{
+  "name": "demyashev/review-three",
+  "description": "PHP SDK for reviewthree.com",
+  "keywords": ["review", "three", "3d", "model","api", "php", "sdk"],
+  "version": "1.0.0",
+  "time": "2021-02-11 14:00:00",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Alexander Demyashev",
+      "email": "alexander.demyashev@gmail.com",
+      "homepage": "https://demyashev.com",
+      "role": "developer"
+    }
+  ],
+  "support": {
+    "email": "sales@reviewthree.com"
+  },
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-simplexml": "*"
+  },
+  "suggest": {
+    "php" : "PHP 7 strict mode",
+    "ext-curl": "Requests to API",
+    "ext-json": "Decode API response",
+    "ext-simplexml": "Decode API response"
+  },
+  "config": {
+    "vendor-dir": "src/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "ReviewThree\\": "src"
+    }
+  }
+}
