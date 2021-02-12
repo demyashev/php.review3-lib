@@ -47,11 +47,19 @@ $service =
         ->setCachePrefix('review3.')                    # key = review3.<search>
         ->setCacheLifetime(60 * 60 * 24)                # 1 day
         
-# by webstore id (main method)
-$byId = $service->search(2933858);
+try {
+    # by webstore id (main method)
+    $byId = $service->search(2933858);
+}
+catch (Exception $e) {
+    die($e->getMessage());
+}
 
+# another methods for search
+# by MPN
 $byMPN = $service->search('GPC97204', Service::METHOD_MPN);
 
+# by barcode
 $byBarcode = $service->search(5901234123457, Service::METHOD_BARCODE);
 
 # by Yandex.Market id
