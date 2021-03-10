@@ -14,7 +14,7 @@ Add these lines to the file `composer.json`
         }
     ],
     "require": {
-        "demyashev/php.review3-lib": "@dev"
+        "demyashev/review-three": "@dev"
     }
 }
 ```
