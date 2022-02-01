@@ -164,70 +164,75 @@ class Service {
             }
         }
 
-        $response = $this->request(urlencode($search), $this->getResponseType(), $method);
+        try {
+            $response = $this->request(urlencode($search), $this->getResponseType(), $method);
 
-        switch ($this->getResponseType()) {
-            case self::RESPONSE_TYPE_XML:
-                /*
-                <Products xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-                    <Product>
-                        <Category>
-                            <Id>3</Id>
-                            <Name>Ноутбуки</Name>
-                            <IsPro>true</IsPro>
-                        </Category>
-                        <Id>7519</Id>
-                        <Name>HP 250 G3 Black</Name>
-                        <Vendor>
-                            <Id>22</Id>
-                            <Name>HP</Name>
-                        </Vendor>
-                    </Product>
-                </Products>
-                 */
-                if (isset($response->Product->Id)) {
-                    $id = $response->Product->Id;
-                }
-                break;
+            switch ($this->getResponseType()) {
+                case self::RESPONSE_TYPE_XML:
+                    /*
+                    <Products xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+                        <Product>
+                            <Category>
+                                <Id>3</Id>
+                                <Name>Ноутбуки</Name>
+                                <IsPro>true</IsPro>
+                            </Category>
+                            <Id>7519</Id>
+                            <Name>HP 250 G3 Black</Name>
+                            <Vendor>
+                                <Id>22</Id>
+                                <Name>HP</Name>
+                            </Vendor>
+                        </Product>
+                    </Products>
+                     */
+                    if (isset($response->Product->Id)) {
+                        $id = $response->Product->Id;
+                    }
+                    break;
 
-            case self::RESPONSE_TYPE_JSON:
-                /*
-                object(stdClass)#2 (8) {
-                  ["id"]=>
-                  int(11638)
-                  ["name"]=>
-                  string(27) "Sony Cyber-shot DSC-RX10 IV"
-                  ["vendor"]=>
-                  object(stdClass)#4 (2) {
-                    ["id"]=>
-                    int(11)
-                    ["name"]=>
-                    string(4) "Sony"
-                  }
-                  ["category"]=>
-                  object(stdClass)#5 (3) {
-                    ["isPro"]=>
-                    bool(false)
-                    ["id"]=>
-                    int(2)
-                    ["name"]=>
-                    string(12) "Камеры"
-                  }
-                  ["rating"]=>
-                  int(0)
-                  ["markets"]=>
-                  array(0) {
-                  }
-                  ["productReleaseDate"]=>
-                  string(7) "2017-10"
-                  ["review3ReleaseDate"]=>
-                  string(10) "2017-11-20"
-                }
-                 */
-                if (isset($response->id)) {
-                    $id = $response->id;
-                }
-                break;
+                case self::RESPONSE_TYPE_JSON:
+                    /*
+                    object(stdClass)#2 (8) {
+                      ["id"]=>
+                      int(11638)
+                      ["name"]=>
+                      string(27) "Sony Cyber-shot DSC-RX10 IV"
+                      ["vendor"]=>
+                      object(stdClass)#4 (2) {
+                        ["id"]=>
+                        int(11)
+                        ["name"]=>
+                        string(4) "Sony"
+                      }
+                      ["category"]=>
+                      object(stdClass)#5 (3) {
+                        ["isPro"]=>
+                        bool(false)
+                        ["id"]=>
+                        int(2)
+                        ["name"]=>
+                        string(12) "Камеры"
+                      }
+                      ["rating"]=>
+                      int(0)
+                      ["markets"]=>
+                      array(0) {
+                      }
+                      ["productReleaseDate"]=>
+                      string(7) "2017-10"
+                      ["review3ReleaseDate"]=>
+                      string(10) "2017-11-20"
+                    }
+                     */
+                    if (isset($response->id)) {
+                        $id = $response->id;
+                    }
+                    break;
+            }
+        }
+        catch (\Exception $e) {
+            return $id;
         }
 
         # 0 or real id
