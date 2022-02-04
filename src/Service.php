@@ -232,7 +232,7 @@ class Service {
             }
         }
         catch (\Exception $e) {
-            return $id;
+            return (int) $id;
         }
 
         # 0 or real id
